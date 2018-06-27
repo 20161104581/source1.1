@@ -13,11 +13,25 @@
 
 struct People {
     int ID;
+    char sex[5];
+    int number;
+    char jiemu;
     char name[20];
     double score[5];
     double final_score;
     int rank;
 } people[Total];
+
+
+struct Rater {
+    int Rater_ID;
+    int Rater_number;
+    char Rater_name[20];
+    char Rater_sex;
+    double Rater_score[5];
+        int rank;
+} Rater[Total];
+
 
 void inputInfo()
 {
@@ -26,6 +40,8 @@ void inputInfo()
         scanf("%d", &people[i].ID);
         getchar();
         scanf("%s", people[i].name);
+        scanf("%s", people[i].sex);
+        scanf("%d", &people[i].number);
         scanf("%lf", &people[i].score[0]);
         scanf("%lf", &people[i].score[1]);
         scanf("%lf", &people[i].score[2]);
@@ -35,6 +51,20 @@ void inputInfo()
         people[i].rank = i + 1;
     }
 }
+
+
+void inputInfoRater()
+{
+    printf("请输入裁判信息:\n");
+    for (int i = 0; i < Total; i ++) {
+        scanf("%d", &Rater[i].Rater_ID);
+        getchar();
+        scanf("%s", Rater[i].Rater_name);
+        scanf("%d", &Rater[i].Rater_number);
+       
+    }
+}
+
 
 void calculateScore()
 {
@@ -129,8 +159,9 @@ void menu()
 {
     printf("-------------------------------------------------\n");
     printf("--  1 - 输入选手信息                             --\n");
-    printf("--  2 - 计算分数并排序数据  --\n");
-    printf("--  3 - 查询选手                     --\n");
+    printf("--  2 - 输入裁判信息                             --\n");
+    printf("--  3 - 计算分数并排序数据  --\n");
+    printf("--  4 - 查询选手                     --\n");
     printf("--  0 - 退出                                  --\n");
     printf("-------------------------------------------------\n");
     
@@ -146,9 +177,12 @@ int main() {
                 inputInfo();
                 break;
             case 2:
-                sort();
+                inputInfoRater();
                 break;
             case 3:
+                sort();
+                break;
+            case 4:
                 quertPeople();
                 break;
             default:
